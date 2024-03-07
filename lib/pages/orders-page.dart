@@ -106,7 +106,7 @@ class _OrdersPageState extends State<OrdersPage> {
               final doc = snapshot.data!.docs[index];
               final productId = doc.id;
               final productName = doc['productName'];
-              final quantity = doc['quantity'] as String; // Treat quantity as string
+              final quantity = doc['quantity'] as String; 
               final price = doc['price'] as String;
               return ListTile(
                 title: Text(productName),
