@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "276438993388",
+    "project_id": "fir-assigmnt",
+    "storage_bucket": "fir-assigmnt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276438993388:android:32bf72b5fa6593fdf818c9",
+        "android_client_info": {
+          "package_name": "com.example.firebase_assgnment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEuQkGRoQB7pipLojh06ifxva5u8aL8HA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
