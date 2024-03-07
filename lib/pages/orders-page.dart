@@ -99,33 +99,54 @@ class _OrdersPageState extends State<OrdersPage> {
             );
           }
 
+          // Calculate total amount
+          double totalAmount = 0;
+          snapshot.data!.docs.forEach((doc) {
+            final quantity = int.tryParse(doc['quantity'] ?? '') ?? 0;
+            final price = double.tryParse(doc['price'] ?? '') ?? 0;
+            totalAmount += quantity * price;
+          });
+
           // If orders are available, display them in a list
-          return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (context, index) {
-              final doc = snapshot.data!.docs[index];
-              final productId = doc.id;
-              final productName = doc['productName'];
-              final quantity = doc['quantity'] as String; 
-              final price = doc['price'] as String;
-              return ListTile(
-                title: Text(productName),
-                subtitle: Text('Quantity: $quantity, Price: \$$price'),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () => _updateQuantity(productId, quantity),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () => _deleteOrder(productId),
-                    ),
-                  ],
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    final doc = snapshot.data!.docs[index];
+                    final productId = doc.id;
+                    final productName = doc['productName'];
+                    final quantity = doc['quantity'] as String; 
+                    final price = doc['price'] as String;
+                    return ListTile(
+                      title: Text(productName),
+                      subtitle: Text('Quantity: $quantity, Price: \$$price'),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.edit),
+                            onPressed: () => _updateQuantity(productId, quantity),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () => _deleteOrder(productId),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Total Orders Amount: \$${totalAmount.toStringAsFixed(2)}',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
           );
         },
       ),
